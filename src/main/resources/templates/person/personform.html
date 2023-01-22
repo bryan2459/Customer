@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Recipe Form</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+        th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+  <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+     <style>h1 {
+            text-align: center; }
+     </style>
+</head>
+<body>
+<!--/*@thymesVar id="person" type="bryan.springframework.domain.Person"*/-->
+<div class="container-fluid" style="margin-top: 20px">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form  th:object="${person}" th:action="@{/person/}"  method="post">
+        <!--/*@thymesVar id="person" type="bryan.springframework.domain.Person"*/-->
+      <!--  <input type="hidden" th:field="*{id}"/> -->
+        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+          <p>Please Correct Errors Below</p>
+        </div>
+        <input type="hidden" th:field="*{id}"/>
+        <div class="pannel-group">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h1 class="panel-title">Edit Customer Information</h1>
+              <a class="btn btn-danger" href="#" th:href="@{'/index'}" role="button">Home</a>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+             <!--div class="col-md-3 form-group" th:class="${#fields.hasErrors('name')}
+                                ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
+                  <label>Name:</label>
+                  <input type="text" class="form-control" th:field="*{name}" th:errorclass="is-invalid"/>
+                  <span class="help-block" th:if="${#fields.hasErrors('name')}">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('name')}" th:text="${#strings.capitalize(err)}"/>
+                       </ul>
+                  </span>
+                </div> -->
+             <!--  <div class="col-md-3 form-group" th:class="${#fields.hasErrors('name')}
+                                ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
+                  <label>Recipe Description:</label>
+                  <input type="text" class="form-control" th:field="*{name}" th:errorclass="has-error"/>
+                  <span class="help-block" th:if="${#fields.hasErrors('name')}">
+                                        <ul>
+                                            <li th:each="err : ${#fields.errors('name')}" th:text="${err}"/>
+                                        </ul>
+                                    </span>
+                </div> -->
+                <div class="col-md-12 form-group" th:class="${#fields.hasErrors('name')}
+                    ? 'col-md-12 form-group text-danger' : 'col-md-12 form-group'">
+                  <label for="desc">Customer Name:</label>
+                  <input id="desc" type="text" class="form-control"
+                         th:field="*{name}" th:errorclass="has-error"/>
+                  <span class="help-block" th:if="${#fields.hasErrors('name')}">
+                    <ul>
+                     <li th:each="err : ${#fields.errors('name')}" th:text="${#strings.capitalize(err)}"></li>
+                   </ul>
+                 </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 form-group">
+                  <label>Categories:</label>
+                </div>
+                <div class="col-md-9 form-group">
+                  <div class="radio">
+                    <label>
+                      <input type="checkbox" value=""/>
+                      Cat 1
+                    </label>
+                  </div>
+                  <div class="radio" th:remove="all">
+                    <label>
+                      <input type="checkbox" value=""/>
+                      Cat 2
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 form-group" th:class="${#fields.hasErrors('address')}
+                                ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
+                   <label>Address:</label>
+                  <input type="text" class="form-control" th:field="*{address}" th:errorclass="has-error"/>
+                  <span class="help-block" th:if="${#fields.hasErrors('address')}">
+                          <ul>
+                                  <li th:each="err : ${#fields.errors('address')}" th:text="${err}"/>
+                          </ul>
+                  </span>
+                </div>
+                <div class="col-md-3 form-group" th:class="${#fields.hasErrors('email')}
+                                ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
+                  <label>Email:</label>
+                  <input type="text" class="form-control" th:field="*{email}" th:errorclass="has-error"/>
+                  <span class="help-block" th:if="${#fields.hasErrors('email')}">
+                          <ul>
+                                  <li th:each="err : ${#fields.errors('email')}" th:text="${err}"/>
+                          </ul>
+                  </span>
+                </div>
+                <div class="col-md-3 form-group">
+                  <label>Marital Status:</label>
+                  <select class="form-control">
+                    <option>Married</option>
+                    <option>Single</option>
+                    <option>Divorced</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 form-group" th:class="${#fields.hasErrors('mobile')}
+                                ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
+                  <label>Mobile:</label>
+                  <input type="text" class="form-control" th:field="*{mobile}"  th:errorclass="has-error"/>
+                  <span class="help-block" th:if="${#fields.hasErrors('mobile')}">
+                          <ul>
+                                  <li th:each="err : ${#fields.errors('mobile')}" th:text="${err}"/>
+                          </ul>
+                  </span>
+                </div>
+                <div class="col-md-3 form-group" th:class="${#fields.hasErrors('dob')}
+                                ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
+                  <label>Date of Birth:</label>
+                  <input type="text" class="form-control" th:field="*{dob}" th:errorclass="has-error"/>
+                  <span class="help-block" th:if="${#fields.hasErrors('dob')}">
+                          <ul>
+                                  <li th:each="err : ${#fields.errors('dob')}" th:text="${err}"/>
+                          </ul>
+                  </span>
+                </div>
+                <div class="col-md-3 form-group">
+                  <label>Dob:</label>
+                  <input type="text" class="form-control" th:field="*{dob}"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-md-11 ">
+                  <h1 class="panel-title">Transactions Summary</h1>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <ul>
+                    <li th:remove="all">1 Cup of milk</li>
+                    <li th:remove="all">1 Teaspoon of chocolate</li>
+                    <li th:each="transValue : ${person.transValues}"
+                        th:text="${ '$' + (transValue.getAmount() +
+                                        ' ' + transValue.getDescription() +
+                                        ' (' + transValue.getTransType() +
+                                        ') - ' + transValue.getCreatedDate())}">1 Teaspoon of Sugar</li>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h1 class="panel-title">BIO</h1>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <textarea class="form-control" rows="3" th:field="*{history}"></textarea></div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h1 class="panel-title">Notes</h1>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <textarea class="form-control" rows="3" th:field="*{history}"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

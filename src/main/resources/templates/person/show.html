@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Show Recipe</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <style>h1 {
+            text-align: center; }
+     </style>
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="pannel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <!--/*@thymesVar id="person" type="bryan.springframework.domain.Person"*/-->
+                        <h1 class="panel-title" th:text="${person.name}">Customer Information</h1>
+                        <a class="btn btn-danger" href="#" th:href="@{'/index'}" role="button">Home</a>
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5><b>Address:</b></h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p th:text="${(person.address) }"></p>
+                            </div>
+
+                            <div class="col-md-3">
+                                <h5>Email:</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p th:text="${(person.email) }"></p>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Mobile:</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p th:text="${(person.mobile) }"></p>
+                            </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Date of Birth:</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p th:text="${(person.dob) }"></p>
+                            </div>
+
+                        </div>
+                    </div>
+                 </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title" >Transactions</h1>
+                        <a class="btn btn-default" href="#" th:href="@{'/person/'+ ${person.id}+'/transactions'}" role="button">View</a>
+
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li th:remove="all">1 Cup of milk</li>
+                                    <li th:remove="all">1 Teaspoon of chocolate</li>
+
+                                    <!--/*@thymesVar id="person" type="bryan.springframework.domain.Person"*/-->
+                                    <li th:each="transValue : ${person.transValues}"
+                                        th:text="${ '$' + (transValue.getAmount() +
+                                        ' ' + transValue.getDescription() +
+                                        ' (' + transValue.getTransType() +
+                                        ') - ' + transValue.getCreatedDate())}">1 Teaspoon of Sugar</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title" >BIO</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!--/*@thymesVar id="person" type="bryan.springframework.domain.Person"*/-->
+                                <p th:remove="all">No Bio available</p>
+                                <p th:text="${person.getHistory().getBio()}"></p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
